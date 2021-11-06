@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Slothsoft.UnityExtensions;
 using TheSheepGame.Player;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 namespace TheSheepGame.WorldObjects {
     public class FoodDestructible : MonoBehaviour {
-        public static event Action<FoodDestructible> onObjectDestroyed;
+        public event Action<FoodDestructible> onObjectDestroyed;
 
         [SerializeField] private Image _canvasImage;
         [SerializeField] private int _foodAmount;
@@ -15,6 +16,9 @@ namespace TheSheepGame.WorldObjects {
         [SerializeField] private float _areaRadius;
         [SerializeField] private int _currentSheepCount;
         private Coroutine _destroyRoutine;
+
+        [SerializeField] LayerMask sheepLayer = default;
+        static Collider[] colliders;
 
         private void OnEnable() {
             Herd.onBite += OnBiteInput;
@@ -30,14 +34,12 @@ namespace TheSheepGame.WorldObjects {
             }
         }
 
-        private void Update() {
-            var colliders = Physics.OverlapSphere(transform.position, _areaRadius);
-            _currentSheepCount = 0;
-            for (var i = 0; i < colliders.Length; i++) {
-                if (colliders[i].CompareTag("Sheep")) {
-                    _currentSheepCount++;
-                }
-            }
+        protected void Start() {
+            colliders = new Collider[Herd.Instance.maxSheepCount];
+        }
+
+        private void FixedUpdate() {
+            _currentSheepCount = Physics.OverlapSphereNonAlloc(transform.position, _areaRadius, colliders, sheepLayer);
 
             float fillAmount = 0f;
             if (_currentSheepCount < _neededSheepCount) {
