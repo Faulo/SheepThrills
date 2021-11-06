@@ -27,6 +27,8 @@ namespace TheSheepGame.Player {
         float foodPerSheep = 10;
         [SerializeField]
         int maxSheepCount = 100;
+        [SerializeField]
+        bool multiplyOnBite = false;
 
         [Header("Debug fields")]
         [SerializeField]
@@ -44,10 +46,12 @@ namespace TheSheepGame.Player {
         }
 
         protected void FixedUpdate() {
-            food += Time.deltaTime;
-            if (sheepList.Count < maxSheepCount && food > foodPerSheep) {
-                food -= foodPerSheep;
-                Multiply();
+            if (!multiplyOnBite) {
+                food += Time.deltaTime;
+                if (sheepList.Count < maxSheepCount && food > foodPerSheep) {
+                    food -= foodPerSheep;
+                    Multiply();
+                }
             }
         }
 
@@ -67,6 +71,9 @@ namespace TheSheepGame.Player {
             onDestroySheep?.Invoke(sheep);
         }
         public void Bite() {
+            if (multiplyOnBite) {
+                Multiply();
+            }
             onBite?.Invoke();
         }
     }
