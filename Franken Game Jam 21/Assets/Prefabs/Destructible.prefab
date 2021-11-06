@@ -138,7 +138,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8517f8e5219f52a4388b945f0561161d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 7393969884020267378}
   - component: {fileID: 7393969884020267377}
   m_Layer: 0
-  m_Name: Destroyable
+  m_Name: Destructible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -220,7 +220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canvasImage: {fileID: 7393969883024826005}
-  _givenFoodAmount: 0
   _neededSheepCount: 10
   _areaRadius: 7.47
   _currentSheepCount: 0

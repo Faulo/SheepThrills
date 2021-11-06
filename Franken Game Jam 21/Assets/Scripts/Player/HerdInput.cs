@@ -21,14 +21,14 @@ namespace TheSheepGame.Player {
 
         protected void OnEnable() {
             actionsInstance = Instantiate(actionsAsset);
-            actionsAsset["Bite"].performed += OnBitePressed;
+            actionsInstance["Bite"].performed += OnBitePressed;
             actionsInstance.Enable();
         }
 
         protected void OnDisable() {
             if (actionsInstance) {
                 actionsInstance.Disable();
-                actionsAsset["Bite"].performed -= OnBitePressed;
+                actionsInstance["Bite"].performed -= OnBitePressed;
                 Destroy(actionsInstance);
             }
         }

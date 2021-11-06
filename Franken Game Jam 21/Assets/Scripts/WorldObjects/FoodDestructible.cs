@@ -6,11 +6,11 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace TheSheepGame.WorldObjects {
-    public class Destructible : MonoBehaviour {
-        public static event Action<Destructible> onObjectDestroyed;
+    public class FoodDestructible : MonoBehaviour {
+        public static event Action<FoodDestructible> onObjectDestroyed;
 
         [SerializeField] private Image _canvasImage;
-        public int FoodAmount { get; private set; }
+        [SerializeField] private int _foodAmount;
         [SerializeField] private int _neededSheepCount;
         [SerializeField] private float _areaRadius;
         [SerializeField] private int _currentSheepCount;
@@ -29,7 +29,7 @@ namespace TheSheepGame.WorldObjects {
                 _destroyRoutine = StartCoroutine(DestroyCoroutine());
             }
         }
-        
+
         private void Update() {
             var colliders = Physics.OverlapSphere(transform.position, _areaRadius);
             _currentSheepCount = 0;
@@ -52,10 +52,11 @@ namespace TheSheepGame.WorldObjects {
         }
 
         private IEnumerator DestroyCoroutine() {
+            Herd.Instance.GainFood(_foodAmount);
             onObjectDestroyed?.Invoke(this);
             yield return null;
         }
-        
+
         private void OnDrawGizmosSelected() {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, _areaRadius);

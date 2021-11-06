@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
+using MyBox;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 
 namespace TheSheepGame.Player {
-    public class Herd : MonoBehaviour {
+    public class Herd : Singleton<Herd> {
         public static event Action onBite;
         public static event Action<Sheep> onSpawnSheep;
         public static event Action<Sheep> onDestroySheep;
@@ -68,6 +69,10 @@ namespace TheSheepGame.Player {
         }
         public void Bite() {
             onBite?.Invoke();
+        }
+
+        public void GainFood(int amount) {
+            food += amount;
         }
     }
 }
