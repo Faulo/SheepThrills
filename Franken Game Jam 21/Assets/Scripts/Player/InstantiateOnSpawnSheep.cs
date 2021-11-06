@@ -4,6 +4,8 @@ namespace TheSheepGame.Player {
     public class InstantiateOnSpawnSheep : MonoBehaviour {
         [SerializeField]
         GameObject prefab = default;
+        [SerializeField]
+        bool asChild = true;
         protected void OnEnable() {
             Herd.onSpawnSheep += HandleSpawnSheep;
         }
@@ -11,7 +13,11 @@ namespace TheSheepGame.Player {
             Herd.onSpawnSheep -= HandleSpawnSheep;
         }
         void HandleSpawnSheep(Sheep obj) {
-            Instantiate(prefab, obj.transform);
+            if (asChild) {
+                Instantiate(prefab, obj.transform);
+            } else {
+                Instantiate(prefab, obj.transform.position, obj.transform.rotation);
+            }
         }
     }
 }

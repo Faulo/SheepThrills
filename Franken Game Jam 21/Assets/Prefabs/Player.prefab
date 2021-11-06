@@ -77,6 +77,7 @@ MonoBehaviour:
   food: 0
   foodPerSheep: 1
   maxSheepCount: 100
+  multiplyOnBite: 1
   speed: 10
   direction: {x: 0, y: 0, z: 1}
 --- !u!114 &6327340540315933156
