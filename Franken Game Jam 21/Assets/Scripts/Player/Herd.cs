@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cinemachine;
 using Slothsoft.UnityExtensions;
@@ -5,6 +6,10 @@ using UnityEngine;
 
 namespace TheSheepGame.Player {
     public class Herd : MonoBehaviour {
+        public static event Action onBite;
+        public static event Action<Sheep> onSpawnSheep;
+        public static event Action<Sheep> onDestroySheep;
+
         [Header("MonoBehaviour configuration")]
         [SerializeField, Expandable]
         public CinemachineVirtualCamera virtualCamera = default;
@@ -48,7 +53,7 @@ namespace TheSheepGame.Player {
 
         public void Multiply() {
             var parent = sheepList.RandomElement();
-            var child = Instantiate(parent, parent.transform.position + Random.insideUnitCircle.normalized.SwizzleXZ(), parent.transform.rotation, transform);
+            var child = Instantiate(parent, parent.transform.position + UnityEngine.Random.insideUnitCircle.normalized.SwizzleXZ(), parent.transform.rotation, transform);
             AddSheep(child);
         }
         void AddSheep(Sheep sheep) {
@@ -56,6 +61,13 @@ namespace TheSheepGame.Player {
             sheepList.Add(sheep);
             cameraGroup.AddMember(sheep.transform, 1, 1);
             speed = maxSpeed * speedOverCount.Evaluate((float)sheepList.Count / maxSheepCount);
+            onSpawnSheep?.Invoke(sheep);
+        }
+        void RemoveSheep(Sheep sheep) {
+            onDestroySheep?.Invoke(sheep);
+        }
+        public void Bite() {
+            onBite?.Invoke();
         }
     }
 }
