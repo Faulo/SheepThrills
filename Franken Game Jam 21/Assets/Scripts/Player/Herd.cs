@@ -4,6 +4,7 @@ using Cinemachine;
 using MyBox;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace TheSheepGame.Player {
     public class Herd : Singleton<Herd> {
@@ -16,6 +17,8 @@ namespace TheSheepGame.Player {
         public CinemachineVirtualCamera virtualCamera = default;
         [SerializeField, Expandable]
         public CinemachineTargetGroup cameraGroup = default;
+        [SerializeField, Expandable]
+        public Light2D herdLight = default;
         [SerializeField, Expandable]
         public Sheep sheepPrefab = default;
 
@@ -68,6 +71,9 @@ namespace TheSheepGame.Player {
             }
             sheepDirection /= sheepCount;
             sheepCenter /= sheepCount;
+
+            herdLight.pointLightOuterRadius = cameraGroup.Sphere.radius;
+            herdLight.transform.position = sheepCenter.SwizzleXZ();
         }
 
         public void Multiply() {
