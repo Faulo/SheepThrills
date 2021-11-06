@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1986290876645235835}
   - component: {fileID: 6207373038166035395}
   m_Layer: 0
-  m_Name: SFX_Bah
+  m_Name: SFX_Pop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,15 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 31aa30260f26d4544ba9acdac2fea6ed, type: 3}
-  - {fileID: 8300000, guid: ac004ef7965fea345aef480ed01c4129, type: 3}
-  - {fileID: 8300000, guid: 88eeeab263e640243871bce65f7d1354, type: 3}
-  - {fileID: 8300000, guid: 15056ca5bae610746a61d0ec6e164030, type: 3}
-  - {fileID: 8300000, guid: 534256ffd3d54d24baa24d4eb0b3b98d, type: 3}
-  - {fileID: 8300000, guid: 10f42a58f14bd974cab6874de95a4977, type: 3}
-  - {fileID: 8300000, guid: 60b23d9fe52f792448b3cc2a64b46361, type: 3}
-  - {fileID: 8300000, guid: 7c31f38b899efbb489dc3105284b8d2c, type: 3}
-  - {fileID: 8300000, guid: 148c40b68cb9a324d87537b44d5a5817, type: 3}
-  - {fileID: 8300000, guid: 9ea742175f34b274ebf275bcbc261368, type: 3}
+  - {fileID: 8300000, guid: 86d4e23f186cab740b87680acd3ee636, type: 3}
   pitchMininum: 0.8
   pitchMaximum: 1.2
