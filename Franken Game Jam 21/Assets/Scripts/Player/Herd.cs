@@ -45,6 +45,8 @@ namespace TheSheepGame.Player {
         public Vector3 inputDirection = Vector3.up;
         [SerializeField]
         public Vector2 sheepCenter = Vector2.zero;
+        [SerializeField]
+        float sheepRadius = 0;
 
         public readonly List<Sheep> sheepList = new List<Sheep>();
         public int sheepCount => sheepList.Count;
@@ -71,8 +73,9 @@ namespace TheSheepGame.Player {
             }
             sheepDirection /= sheepCount;
             sheepCenter /= sheepCount;
+            sheepRadius = cameraGroup.Sphere.radius;
 
-            herdLight.pointLightOuterRadius = cameraGroup.Sphere.radius;
+            herdLight.pointLightOuterRadius = sheepRadius;
             herdLight.transform.position = sheepCenter.SwizzleXZ();
         }
 
@@ -80,13 +83,13 @@ namespace TheSheepGame.Player {
             if (sheepList.Count >= maxSheepCount) {
                 return;
             }
-            var child = Instantiate(sheepPrefab, (sheepCenter + randomOnUnitCircle).SwizzleXZ(), Quaternion.identity, transform);
+            var child = Instantiate(sheepPrefab, (sheepCenter + randomPointInHerd).SwizzleXZ(), Quaternion.identity, transform);
             AddSheep(child);
         }
-        Vector2 randomOnUnitCircle {
+        Vector2 randomPointInHerd {
             get {
                 int value = UnityEngine.Random.Range(0, 360);
-                return new Vector2(Mathf.Sin(value), Mathf.Cos(value));
+                return new Vector2(Mathf.Sin(value), Mathf.Cos(value)) * Mathf.Sqrt(sheepCount);
             }
         }
         void AddSheep(Sheep sheep) {
