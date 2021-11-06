@@ -11,7 +11,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.72}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4805143520089246001
 MonoBehaviour:
@@ -186,12 +186,16 @@ PrefabInstance:
       value: PearDestructible
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: _areaRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _foodAmount
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _neededSheepCount
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267378, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_RootOrder

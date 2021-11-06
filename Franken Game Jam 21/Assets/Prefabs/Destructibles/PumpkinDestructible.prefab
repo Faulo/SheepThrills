@@ -11,8 +11,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.49, y: 1, z: 2.04}
-  m_Center: {x: 0, y: 0, z: -0.14}
+  m_Size: {x: 3, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6238061521958427432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,12 +186,16 @@ PrefabInstance:
       value: PumpkinDestructible
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: _areaRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _foodAmount
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _neededSheepCount
-      value: 7
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267378, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_RootOrder
