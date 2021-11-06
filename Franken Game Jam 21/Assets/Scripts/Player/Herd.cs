@@ -27,7 +27,7 @@ namespace TheSheepGame.Player {
         [SerializeField]
         float foodPerSheep = 10;
         [SerializeField]
-        int maxSheepCount = 100;
+        public int maxSheepCount = 100;
         [SerializeField]
         bool multiplyOnBite = false;
 
