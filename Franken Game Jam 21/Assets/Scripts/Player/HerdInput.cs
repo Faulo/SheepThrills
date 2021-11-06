@@ -1,11 +1,12 @@
-using Slothsoft.UnityExtensions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace TheSheepGame.Player {
     public class HerdInput : MonoBehaviour {
-        [SerializeField] Herd herd = default;
-        [SerializeField] InputActionAsset actionsAsset = default;
+        [SerializeField]
+        Herd herd = default;
+        [SerializeField]
+        InputActionAsset actionsAsset = default;
 
         InputActionAsset actionsInstance;
 
@@ -21,26 +22,25 @@ namespace TheSheepGame.Player {
 
         protected void OnEnable() {
             actionsInstance = Instantiate(actionsAsset);
-            actionsInstance["Bite"].performed += OnBitePressed;
+            actionsInstance[nameof(Move)].performed += Move;
+            actionsInstance[nameof(Bite)].performed += Bite;
             actionsInstance.Enable();
         }
 
         protected void OnDisable() {
             if (actionsInstance) {
                 actionsInstance.Disable();
-                actionsInstance["Bite"].performed -= OnBitePressed;
+                actionsInstance[nameof(Move)].performed -= Move;
+                actionsInstance[nameof(Bite)].performed -= Bite;
                 Destroy(actionsInstance);
             }
         }
 
-        protected void Update() {
-            herd.direction = actionsInstance["Move"].ReadValue<Vector2>();
+        void Move(InputAction.CallbackContext context) {
+            herd.direction = context.ReadValue<Vector2>();
         }
 
-        private void OnBitePressed(InputAction.CallbackContext context) {
-            if (!context.performed) {
-                return;
-            }
+        void Bite(InputAction.CallbackContext context) {
             herd.Bite();
         }
 
