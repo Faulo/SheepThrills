@@ -240,10 +240,12 @@ MonoBehaviour:
   randomDirectionWeight: 1
   separationWeight: 1.5
   cohesionWeight: 0.25
+  repelWeight: 2
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   separation: {x: 0, y: 0}
   cohesion: {x: 0, y: 0}
+  repel: {x: 0, y: 0}
 --- !u!1 &7718335375722524472
 GameObject:
   m_ObjectHideFlags: 0

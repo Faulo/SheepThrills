@@ -191,10 +191,69 @@ MonoBehaviour:
   foodPerSheep: 1
   maxSheepCount: 100
   multiplyOnBite: 1
+  repelCurveX:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -10
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  repelCurveY:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -10
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 3.748766
+      value: 0.7045247
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 10
+      value: 0
+      inSlope: -0.1479218
+      outSlope: -0.1479218
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.122672655
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   speed: 10
   sheepDirection: {x: 0, y: 1, z: 0}
   inputDirection: {x: 0, y: 1, z: 0}
+  sheepRotation: {x: 0, y: 0, z: 0, w: 1}
   sheepCenter: {x: 0, y: 0}
+  sheepRadius: 0
 --- !u!114 &6327340540315933156
 MonoBehaviour:
   m_ObjectHideFlags: 0

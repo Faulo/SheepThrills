@@ -35,6 +35,10 @@ namespace TheSheepGame.Player {
         public int maxSheepCount = 100;
         [SerializeField]
         bool multiplyOnBite = false;
+        [SerializeField]
+        AnimationCurve repelCurveX = AnimationCurve.Constant(-10, 10, 0);
+        [SerializeField]
+        AnimationCurve repelCurveY = AnimationCurve.Constant(-10, 10, 0);
 
         [Header("Debug fields")]
         [SerializeField]
@@ -43,6 +47,8 @@ namespace TheSheepGame.Player {
         public Vector3 sheepDirection = Vector2.up;
         [SerializeField]
         public Vector3 inputDirection = Vector3.up;
+        [SerializeField]
+        Quaternion sheepRotation = Quaternion.identity;
         [SerializeField]
         public Vector2 sheepCenter = Vector2.zero;
         [SerializeField]
@@ -72,11 +78,19 @@ namespace TheSheepGame.Player {
                 sheepCenter += sheepList[i].position;
             }
             sheepDirection /= sheepCount;
+            sheepRotation = Quaternion.LookRotation(sheepDirection, Vector3.up);
             sheepCenter /= sheepCount;
             sheepRadius = cameraGroup.Sphere.radius;
 
             herdLight.pointLightOuterRadius = sheepRadius;
             herdLight.transform.position = sheepCenter.SwizzleXZ();
+        }
+
+        public Vector2 CalculateRepel(Vector2 position) {
+            var offset = Quaternion.Inverse(sheepRotation) * (position - sheepCenter).SwizzleXZ();
+            offset.x = repelCurveX.Evaluate(offset.z);
+            offset.z = repelCurveY.Evaluate(offset.z);
+            return (sheepRotation * offset).SwizzleXZ();
         }
 
         public void Multiply() {
