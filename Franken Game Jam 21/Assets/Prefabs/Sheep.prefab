@@ -320,12 +320,13 @@ MonoBehaviour:
   herdRotationWeight: 0.5
   inputRotationWeight: 0.5
   herdVelocityWeight: 0.5
-  randomDirectionWeight: 0.5
-  separationWeight: 0.5
+  randomDirectionWeight: 0.25
+  separationWeight: 1.5
   cohesionWeight: 0.25
   position: {x: 0, y: 0}
   velocity: {x: 0, y: 0}
   separation: {x: 0, y: 0}
+  cohesion: {x: 0, y: 0}
 --- !u!1 &4818737471995153131
 GameObject:
   m_ObjectHideFlags: 0

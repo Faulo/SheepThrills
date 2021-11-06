@@ -1,3 +1,4 @@
+using Slothsoft.UnityExtensions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -37,7 +38,7 @@ namespace TheSheepGame.Player {
         }
 
         void Move(InputAction.CallbackContext context) {
-            herd.direction = context.ReadValue<Vector2>();
+            herd.inputDirection = context.ReadValue<Vector2>().SwizzleXZ();
         }
 
         void Bite(InputAction.CallbackContext context) {
