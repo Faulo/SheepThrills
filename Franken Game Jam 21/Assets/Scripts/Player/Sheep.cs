@@ -24,6 +24,8 @@ namespace TheSheepGame.Player {
         float separationWeight = 0.5f;
         [SerializeField, Range(0, 10)]
         float cohesionWeight = 0.5f;
+        [SerializeField, Range(0, 10)]
+        float repelWeight = 0.5f;
 
         [Header("Debug fields")]
         [SerializeField]
@@ -34,6 +36,8 @@ namespace TheSheepGame.Player {
         Vector2 separation = Vector2.zero;
         [SerializeField]
         Vector2 cohesion = Vector2.zero;
+        [SerializeField]
+        Vector2 repel = Vector2.zero;
 
         float torque;
 
@@ -53,6 +57,7 @@ namespace TheSheepGame.Player {
         }
         Vector2 CalculateVelocity() {
             position = transform.position.SwizzleXZ();
+
             separation = Vector2.zero;
             for (int i = 0; i < herd.sheepList.Count; i++) {
                 var theirPosition = herd.sheepList[i].position;
@@ -61,11 +66,15 @@ namespace TheSheepGame.Player {
                     separation += delta.normalized / Mathf.Max(0.01f, delta.sqrMagnitude);
                 }
             }
+
             cohesion = herd.sheepCenter - position;
+
+            repel = herd.CalculateRepel(position);
 
             return (herd.speed * herdVelocityWeight * transform.forward.SwizzleXZ())
                  + (cohesion * cohesionWeight)
                  + (separation * separationWeight)
+                 + (repel * repelWeight)
                  + (Random.insideUnitCircle * randomDirectionWeight);
         }
     }
