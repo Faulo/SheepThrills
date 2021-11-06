@@ -11,7 +11,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4.51, y: 1, z: 5}
+  m_Size: {x: 10, y: 1, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7596821946027146109
 MonoBehaviour:
@@ -174,8 +174,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6198023702307338338}
     - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.51
       objectReference: {fileID: 0}
     - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -188,6 +196,10 @@ PrefabInstance:
     - target: {fileID: 7393969884020267376, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_Name
       value: SlaughterHouseDestructible
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: _areaRadius
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _foodAmount

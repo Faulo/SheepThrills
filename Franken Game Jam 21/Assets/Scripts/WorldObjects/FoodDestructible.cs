@@ -60,7 +60,7 @@ namespace TheSheepGame.WorldObjects {
             yield return null;
         }
 
-        private void OnDrawGizmosSelected() {
+        private void OnDrawGizmos() {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, _areaRadius);
         }
