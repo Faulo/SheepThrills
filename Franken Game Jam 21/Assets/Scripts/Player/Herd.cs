@@ -4,6 +4,7 @@ using Cinemachine;
 using MyBox;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 namespace TheSheepGame.Player {
     public class Herd : Singleton<Herd> {
@@ -16,6 +17,8 @@ namespace TheSheepGame.Player {
         public CinemachineVirtualCamera virtualCamera = default;
         [SerializeField, Expandable]
         public CinemachineTargetGroup cameraGroup = default;
+        [SerializeField, Expandable]
+        public Light2D herdLight = default;
         [SerializeField, Expandable]
         public Sheep sheepPrefab = default;
 
@@ -32,6 +35,10 @@ namespace TheSheepGame.Player {
         public int maxSheepCount = 100;
         [SerializeField]
         bool multiplyOnBite = false;
+        [SerializeField]
+        AnimationCurve repelCurveX = AnimationCurve.Constant(-10, 10, 0);
+        [SerializeField]
+        AnimationCurve repelCurveY = AnimationCurve.Constant(-10, 10, 0);
 
         [Header("Debug fields")]
         [SerializeField]
@@ -41,7 +48,11 @@ namespace TheSheepGame.Player {
         [SerializeField]
         public Vector3 inputDirection = Vector3.up;
         [SerializeField]
+        Quaternion sheepRotation = Quaternion.identity;
+        [SerializeField]
         public Vector2 sheepCenter = Vector2.zero;
+        [SerializeField]
+        float sheepRadius = 0;
 
         public readonly List<Sheep> sheepList = new List<Sheep>();
         public int sheepCount => sheepList.Count;
@@ -53,13 +64,6 @@ namespace TheSheepGame.Player {
         }
 
         protected void FixedUpdate() {
-            if (!multiplyOnBite) {
-                food += Time.deltaTime;
-                if (food > foodPerSheep) {
-                    food -= foodPerSheep;
-                    Multiply();
-                }
-            }
             sheepDirection = Vector3.zero;
             sheepCenter = Vector2.zero;
             for (int i = 0; i < sheepList.Count; i++) {
@@ -67,20 +71,37 @@ namespace TheSheepGame.Player {
                 sheepCenter += sheepList[i].position;
             }
             sheepDirection /= sheepCount;
+            sheepRotation = Quaternion.LookRotation(sheepDirection, Vector3.up);
             sheepCenter /= sheepCount;
+            sheepRadius = cameraGroup.Sphere.radius;
+
+            herdLight.pointLightOuterRadius = sheepRadius;
+            herdLight.transform.position = sheepCenter.SwizzleXZ();
+
+            if (food > foodPerSheep) {
+                food -= foodPerSheep;
+                Multiply();
+            }
+        }
+
+        public Vector2 CalculateRepel(Vector2 position) {
+            var offset = Quaternion.Inverse(sheepRotation) * (position - sheepCenter).SwizzleXZ();
+            offset.x = repelCurveX.Evaluate(offset.z);
+            offset.z = repelCurveY.Evaluate(offset.z);
+            return (sheepRotation * offset).SwizzleXZ();
         }
 
         public void Multiply() {
             if (sheepList.Count >= maxSheepCount) {
                 return;
             }
-            var child = Instantiate(sheepPrefab, (sheepCenter + randomOnUnitCircle).SwizzleXZ(), Quaternion.identity, transform);
+            var child = Instantiate(sheepPrefab, (sheepCenter + randomPointInHerd).SwizzleXZ(), Quaternion.Inverse(sheepRotation), transform);
             AddSheep(child);
         }
-        Vector2 randomOnUnitCircle {
+        Vector2 randomPointInHerd {
             get {
                 int value = UnityEngine.Random.Range(0, 360);
-                return new Vector2(Mathf.Sin(value), Mathf.Cos(value));
+                return new Vector2(Mathf.Sin(value), Mathf.Cos(value)) * Mathf.Sqrt(sheepCount);
             }
         }
         void AddSheep(Sheep sheep) {
@@ -95,7 +116,7 @@ namespace TheSheepGame.Player {
         }
         public void Bite() {
             if (multiplyOnBite) {
-                Multiply();
+                food += foodPerSheep;
             }
             onBite?.Invoke();
         }
