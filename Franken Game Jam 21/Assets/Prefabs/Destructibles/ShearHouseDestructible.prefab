@@ -26,7 +26,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destructible: {fileID: 314945514140616047}
-  _ownRenderer: {fileID: 4545069006238683530}
+  _renderers:
+  - {fileID: 4545069006238683530}
   _ownCollider: {fileID: 1250677531198151152}
 --- !u!212 &4545069006238683530
 SpriteRenderer:

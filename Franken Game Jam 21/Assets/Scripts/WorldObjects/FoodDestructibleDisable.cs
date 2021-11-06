@@ -1,11 +1,12 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TheSheepGame.WorldObjects
 {
     public class FoodDestructibleDisable : MonoBehaviour {
         [SerializeField] private FoodDestructible _destructible;
-        [SerializeField] private SpriteRenderer _ownRenderer;
+        [SerializeField] private List<SpriteRenderer> _renderers = new List<SpriteRenderer>();
         [SerializeField] private BoxCollider _ownCollider;
 
         private void OnEnable() {
@@ -17,7 +18,9 @@ namespace TheSheepGame.WorldObjects
         }
 
         private void HandleDestruction() {
-            _ownRenderer.enabled = false;
+            foreach (var renderer in _renderers) {
+                renderer.enabled = false;
+            }
             _ownCollider.enabled = false;
         }
     }
