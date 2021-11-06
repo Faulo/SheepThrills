@@ -9,9 +9,15 @@ namespace TheSheepGame.Player {
         [SerializeField]
         public CharacterController character = default;
 
-        [Header("Movement configuration")]
+        [Header("Torque configuration")]
+        [SerializeField, Range(0, 10)]
+        float torqueSmoothing = 1;
         [SerializeField, Range(0, 1)]
-        float useInputDirection = 0.5f;
+        float herdRotationWeight = 0.5f;
+        [SerializeField, Range(0, 1)]
+        float inputRotationWeight = 0.5f;
+
+        [Header("Movement configuration")]
         [SerializeField, Range(0, 10)]
         float herdVelocityWeight = 0.5f;
         [SerializeField, Range(0, 10)]
@@ -29,6 +35,8 @@ namespace TheSheepGame.Player {
         [SerializeField]
         Vector2 separation = Vector3.zero;
 
+        float torque;
+
         protected void Awake() {
             OnValidate();
         }
@@ -41,7 +49,11 @@ namespace TheSheepGame.Player {
         }
 
         protected void FixedUpdate() {
-            transform.rotation = Quaternion.LookRotation(CalculateDirection(), Vector3.up);
+            float currentAngle = transform.rotation.eulerAngles.y;
+            float targetAngle = Quaternion.LookRotation(CalculateDirection(), Vector3.up).eulerAngles.y;
+            float newAngle = Mathf.SmoothDampAngle(currentAngle, targetAngle, ref torque, torqueSmoothing);
+
+            transform.rotation = Quaternion.Euler(0, newAngle, 0);
 
             velocity = CalculateVelocity();
             character.Move(velocity.SwizzleXZ() * Time.deltaTime);
@@ -52,7 +64,8 @@ namespace TheSheepGame.Player {
                 direction += herd.sheepList[i].transform.forward;
             }
             direction /= herd.sheepCount;
-            return Vector3.Lerp(direction, herd.direction, useInputDirection);
+            return (direction * herdRotationWeight)
+                 + (herd.direction.SwizzleXZ() * inputRotationWeight);
         }
         Vector2 CalculateVelocity() {
             var myPosition = transform.position.SwizzleXZ();

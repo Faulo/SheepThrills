@@ -35,7 +35,7 @@ namespace TheSheepGame.Player {
         [SerializeField]
         public float speed = 0;
         [SerializeField]
-        public Vector3 direction = Vector3.forward;
+        public Vector2 direction = Vector2.up;
 
         public readonly List<Sheep> sheepList = new List<Sheep>();
         public int sheepCount => sheepList.Count;
@@ -49,7 +49,7 @@ namespace TheSheepGame.Player {
         protected void FixedUpdate() {
             if (!multiplyOnBite) {
                 food += Time.deltaTime;
-                if (sheepList.Count < maxSheepCount && food > foodPerSheep) {
+                if (food > foodPerSheep) {
                     food -= foodPerSheep;
                     Multiply();
                 }
@@ -57,6 +57,9 @@ namespace TheSheepGame.Player {
         }
 
         public void Multiply() {
+            if (sheepList.Count >= maxSheepCount) {
+                return;
+            }
             var parent = sheepList.RandomElement();
             var child = Instantiate(parent, parent.transform.position + UnityEngine.Random.insideUnitCircle.normalized.SwizzleXZ(), parent.transform.rotation, transform);
             AddSheep(child);
