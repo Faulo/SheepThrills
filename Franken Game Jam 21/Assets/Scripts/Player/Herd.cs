@@ -64,13 +64,6 @@ namespace TheSheepGame.Player {
         }
 
         protected void FixedUpdate() {
-            if (!multiplyOnBite) {
-                food += Time.deltaTime;
-                if (food > foodPerSheep) {
-                    food -= foodPerSheep;
-                    Multiply();
-                }
-            }
             sheepDirection = Vector3.zero;
             sheepCenter = Vector2.zero;
             for (int i = 0; i < sheepList.Count; i++) {
@@ -84,6 +77,11 @@ namespace TheSheepGame.Player {
 
             herdLight.pointLightOuterRadius = sheepRadius;
             herdLight.transform.position = sheepCenter.SwizzleXZ();
+
+            if (food > foodPerSheep) {
+                food -= foodPerSheep;
+                Multiply();
+            }
         }
 
         public Vector2 CalculateRepel(Vector2 position) {
@@ -118,7 +116,7 @@ namespace TheSheepGame.Player {
         }
         public void Bite() {
             if (multiplyOnBite) {
-                Multiply();
+                food += foodPerSheep;
             }
             onBite?.Invoke();
         }
