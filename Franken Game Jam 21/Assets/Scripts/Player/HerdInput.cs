@@ -21,14 +21,14 @@ namespace TheSheepGame.Player {
 
         protected void OnEnable() {
             actionsInstance = Instantiate(actionsAsset);
-            actionsAsset["Destroy"].performed += OnDestroyPressed;
+            actionsAsset["Bite"].performed += OnBitePressed;
             actionsInstance.Enable();
         }
 
         protected void OnDisable() {
             if (actionsInstance) {
                 actionsInstance.Disable();
-                actionsAsset["Destroy"].performed -= OnDestroyPressed;
+                actionsAsset["Bite"].performed -= OnBitePressed;
                 Destroy(actionsInstance);
             }
         }
@@ -38,16 +38,13 @@ namespace TheSheepGame.Player {
             if (move != Vector2.zero) {
                 herd.direction = move.normalized.SwizzleXZ();
             }
-            if (actionsInstance["Bite"].WasPressedThisFrame()) {
-                herd.Bite();
-            }
         }
 
-        private void OnDestroyPressed(InputAction.CallbackContext context) {
+        private void OnBitePressed(InputAction.CallbackContext context) {
             if (!context.performed) {
                 return;
             }
-            //TODO: Herd.Bite()
+            herd.Bite();
         }
 
         protected void OnDrawGizmos() {
