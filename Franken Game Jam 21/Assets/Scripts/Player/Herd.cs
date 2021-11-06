@@ -34,7 +34,7 @@ namespace TheSheepGame.Player {
         [SerializeField]
         public float speed = 0;
         [SerializeField]
-        public Vector3 direction = Vector3.forward;
+        public Vector2 direction = Vector2.up;
 
         public readonly List<Sheep> sheepList = new List<Sheep>();
         public int sheepCount => sheepList.Count;

@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3182046176804685546}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 93719477983632633}
@@ -322,11 +322,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   herd: {fileID: 0}
   character: {fileID: 2030685574796548660}
-  useInputDirection: 0.5
+  torqueSmoothing: 0.25
+  herdRotationWeight: 0.5
+  inputRotationWeight: 0.5
   herdVelocityWeight: 0.5
   randomDirectionWeight: 0.5
-  separationWeight: 1
-  cohesionWeight: 0.5
+  separationWeight: 0.5
+  cohesionWeight: 0.25
   velocity: {x: 0, y: 0}
   cohesion: {x: 0, y: 0}
   separation: {x: 0, y: 0}

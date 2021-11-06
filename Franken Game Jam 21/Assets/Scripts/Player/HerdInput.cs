@@ -30,10 +30,7 @@ namespace TheSheepGame.Player {
             }
         }
         protected void Update() {
-            var move = actionsInstance["Move"].ReadValue<Vector2>();
-            if (move != Vector2.zero) {
-                herd.direction = move.normalized.SwizzleXZ();
-            }
+            herd.direction = actionsInstance["Move"].ReadValue<Vector2>();
             if (actionsInstance["Bite"].WasPressedThisFrame()) {
                 herd.Bite();
             }
