@@ -16,7 +16,6 @@ namespace TheSheepGame.Player {
             if (asChild) {
                 Instantiate(prefab, sheep.transform);
             } else {
-                Debug.Log(prefab);
                 Instantiate(prefab, sheep.transform.position, sheep.transform.rotation);
             }
         }

@@ -6,6 +6,8 @@ namespace TheSheepGame.Player {
         [Header("MonoBehaviour configuration")]
         [SerializeField]
         public Herd herd = default;
+        [SerializeField]
+        public CharacterController character = default;
 
         [Header("Torque configuration")]
         [SerializeField, Range(0, 10)]
@@ -41,6 +43,15 @@ namespace TheSheepGame.Player {
 
         float torque;
 
+        protected void Awake() {
+            OnValidate();
+        }
+        protected void OnValidate() {
+            if (!character) {
+                TryGetComponent(out character);
+            }
+        }
+
         protected void FixedUpdate() {
             float currentAngle = transform.rotation.eulerAngles.y;
             float targetAngle = Quaternion.LookRotation(CalculateDirection(), Vector3.up).eulerAngles.y;
@@ -49,7 +60,7 @@ namespace TheSheepGame.Player {
             transform.rotation = Quaternion.Euler(0, newAngle, 0);
 
             velocity = CalculateVelocity();
-            transform.position += velocity.SwizzleXZ() * Time.deltaTime;
+            character.Move(velocity.SwizzleXZ() * Time.deltaTime);
         }
         Vector3 CalculateDirection() {
             return (herd.sheepDirection * herdRotationWeight)
