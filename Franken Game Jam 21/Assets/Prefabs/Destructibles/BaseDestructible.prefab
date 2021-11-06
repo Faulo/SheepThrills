@@ -203,7 +203,7 @@ MonoBehaviour:
   _canvasImage: {fileID: 7393969883024826005}
   _foodAmount: 0
   _neededSheepCount: 10
-  _areaRadius: 7.47
+  _areaRadius: 3
   _currentSheepCount: 0
   sheepLayer:
     serializedVersion: 2
@@ -267,7 +267,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &7393969884180523448
 MonoBehaviour:

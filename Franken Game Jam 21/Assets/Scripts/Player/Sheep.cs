@@ -1,3 +1,4 @@
+using System.Collections;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 
@@ -8,6 +9,12 @@ namespace TheSheepGame.Player {
         public Herd herd = default;
         [SerializeField]
         public CharacterController character = default;
+
+        [Header("Spawn configuration")]
+        [SerializeField, Range(0, 10)]
+        float spawnDuration = 1;
+        [SerializeField]
+        AnimationCurve spawnScaling = AnimationCurve.Linear(0, 0, 1, 1);
 
         [Header("Torque configuration")]
         [SerializeField, Range(0, 10)]
@@ -50,6 +57,19 @@ namespace TheSheepGame.Player {
             if (!character) {
                 TryGetComponent(out character);
             }
+        }
+
+        float size {
+            set {
+                transform.localScale = new Vector3(value, 1, value);
+            }
+        }
+        protected IEnumerator Start() {
+            for (float timer = 0; timer < spawnDuration; timer += Time.deltaTime) {
+                size = spawnScaling.Evaluate(timer / spawnDuration);
+                yield return null;
+            }
+            size = spawnScaling.Evaluate(1);
         }
 
         protected void FixedUpdate() {

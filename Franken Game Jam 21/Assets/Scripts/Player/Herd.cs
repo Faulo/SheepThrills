@@ -39,6 +39,8 @@ namespace TheSheepGame.Player {
         [SerializeField]
         bool multiplyOnBite = false;
         [SerializeField]
+        bool autoBite = false;
+        [SerializeField]
         AnimationCurve repelCurveX = AnimationCurve.Constant(-10, 10, 0);
         [SerializeField]
         AnimationCurve repelCurveY = AnimationCurve.Constant(-10, 10, 0);
@@ -81,10 +83,14 @@ namespace TheSheepGame.Player {
             herdLight.pointLightOuterRadius = sheepRadius;
             herdLight.transform.position = sheepCenter.SwizzleXZ();
 
-            food -= hungerPerSecond * Time.deltaTime;
+            food -= sheepCount * hungerPerSecond * Time.deltaTime;
 
-            if (food > foodPerSheep) {
-                food -= foodPerSheep;
+            if (autoBite) {
+                Bite();
+            }
+
+            if (food > foodPerSheep * sheepCount) {
+                food -= foodPerSheep * sheepCount;
                 Multiply();
             }
             if (food < -foodPerSheep) {

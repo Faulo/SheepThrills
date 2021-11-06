@@ -11,6 +11,7 @@ namespace TheSheepGame {
 
         protected void Awake() {
             OnValidate();
+            tilemap.RefreshAllTiles();
         }
 
         protected void OnValidate() {
