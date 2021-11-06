@@ -95,7 +95,7 @@ namespace TheSheepGame.Player {
             if (sheepList.Count >= maxSheepCount) {
                 return;
             }
-            var child = Instantiate(sheepPrefab, (sheepCenter + randomPointInHerd).SwizzleXZ(), Quaternion.identity, transform);
+            var child = Instantiate(sheepPrefab, (sheepCenter + randomPointInHerd).SwizzleXZ(), Quaternion.Inverse(sheepRotation), transform);
             AddSheep(child);
         }
         Vector2 randomPointInHerd {
