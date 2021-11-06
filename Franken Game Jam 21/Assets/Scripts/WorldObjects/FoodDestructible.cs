@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace TheSheepGame.WorldObjects {
     public class FoodDestructible : MonoBehaviour {
-        public event Action<FoodDestructible> onObjectDestroyed;
+        public event Action onObjectDestroyed;
 
         [SerializeField] private Image _canvasImage;
         [SerializeField] private int _foodAmount;
@@ -55,7 +55,7 @@ namespace TheSheepGame.WorldObjects {
 
         private IEnumerator DestroyCoroutine() {
             Herd.Instance.GainFood(_foodAmount);
-            onObjectDestroyed?.Invoke(this);
+            onObjectDestroyed?.Invoke();
             yield return null;
         }
 
