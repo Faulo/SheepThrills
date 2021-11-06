@@ -1,21 +1,22 @@
 using UnityEngine;
 
 namespace TheSheepGame.Player {
-    public class InstantiateOnSpawnSheep : MonoBehaviour {
+    public class InstantiateOnDestroySheep : MonoBehaviour {
         [SerializeField]
         GameObject prefab = default;
         [SerializeField]
         bool asChild = true;
         protected void OnEnable() {
-            Herd.onSpawnSheep += HandleSpawnSheep;
+            Herd.onDestroySheep += HandleDestroySheep;
         }
         protected void OnDisable() {
-            Herd.onSpawnSheep -= HandleSpawnSheep;
+            Herd.onDestroySheep -= HandleDestroySheep;
         }
-        void HandleSpawnSheep(Sheep sheep) {
+        void HandleDestroySheep(Sheep sheep) {
             if (asChild) {
                 Instantiate(prefab, sheep.transform);
             } else {
+                Debug.Log(prefab);
                 Instantiate(prefab, sheep.transform.position, sheep.transform.rotation);
             }
         }

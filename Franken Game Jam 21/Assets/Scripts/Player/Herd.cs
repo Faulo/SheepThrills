@@ -11,6 +11,7 @@ namespace TheSheepGame.Player {
         public static event Action onBite;
         public static event Action<Sheep> onSpawnSheep;
         public static event Action<Sheep> onDestroySheep;
+        public static event Action onLose;
 
         [Header("MonoBehaviour configuration")]
         [SerializeField, Expandable]
@@ -31,6 +32,8 @@ namespace TheSheepGame.Player {
         float food = 0;
         [SerializeField]
         float foodPerSheep = 10;
+        [SerializeField]
+        float hungerPerSecond = 1;
         [SerializeField]
         public int maxSheepCount = 100;
         [SerializeField]
@@ -78,9 +81,15 @@ namespace TheSheepGame.Player {
             herdLight.pointLightOuterRadius = sheepRadius;
             herdLight.transform.position = sheepCenter.SwizzleXZ();
 
+            food -= hungerPerSecond * Time.deltaTime;
+
             if (food > foodPerSheep) {
                 food -= foodPerSheep;
                 Multiply();
+            }
+            if (food < -foodPerSheep) {
+                food += foodPerSheep;
+                Decimate();
             }
         }
 
@@ -108,11 +117,28 @@ namespace TheSheepGame.Player {
             sheep.herd = this;
             sheepList.Add(sheep);
             cameraGroup.AddMember(sheep.transform, 1, 1);
-            speed = maxSpeed * speedOverCount.Evaluate((float)sheepList.Count / maxSheepCount);
+            UpdateSpeed();
             onSpawnSheep?.Invoke(sheep);
         }
+        public void Decimate() {
+            if (sheepList.Count == 0) {
+                return;
+            }
+            RemoveSheep(sheepList.RandomElement());
+        }
         void RemoveSheep(Sheep sheep) {
+            sheepList.Remove(sheep);
+            cameraGroup.RemoveMember(sheep.transform);
+            UpdateSpeed();
             onDestroySheep?.Invoke(sheep);
+            Destroy(sheep.gameObject);
+
+            if (sheepList.Count == 0) {
+                Lose();
+            }
+        }
+        void UpdateSpeed() {
+            speed = maxSpeed * speedOverCount.Evaluate((float)sheepList.Count / maxSheepCount);
         }
         public void Bite() {
             if (multiplyOnBite) {
@@ -120,7 +146,11 @@ namespace TheSheepGame.Player {
             }
             onBite?.Invoke();
         }
+        void Lose() {
+            Destroy(gameObject);
 
+            onLose?.Invoke();
+        }
         public void GainFood(int amount) {
             food += amount;
         }

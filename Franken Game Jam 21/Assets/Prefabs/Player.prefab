@@ -189,6 +189,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   food: 0
   foodPerSheep: 1
+  hungerPerSecond: 0.5
   maxSheepCount: 100
   multiplyOnBite: 0
   repelCurveX:
