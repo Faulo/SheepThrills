@@ -11,6 +11,7 @@ namespace TheSheepGame.Player {
         public static event Action onBite;
         public static event Action<Sheep> onSpawnSheep;
         public static event Action<Sheep> onDestroySheep;
+        public static event Action<float> onGainFood;
         public static event Action onLose;
 
         [Header("MonoBehaviour configuration")]
@@ -159,6 +160,7 @@ namespace TheSheepGame.Player {
         }
         public void GainFood(float amount) {
             food += amount;
+            onGainFood?.Invoke(amount);
         }
     }
 }

@@ -20,6 +20,12 @@ namespace TheSheepGame.WorldObjects {
         [SerializeField] LayerMask sheepLayer = default;
         static Collider[] colliders;
 
+        public int foodAmount {
+            get {
+                return _foodAmount;
+            }
+        }
+        
         private void OnEnable() {
             Herd.onBite += OnBiteInput;
         }
