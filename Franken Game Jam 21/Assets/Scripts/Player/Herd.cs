@@ -151,7 +151,7 @@ namespace TheSheepGame.Player {
 
             onLose?.Invoke();
         }
-        public void GainFood(int amount) {
+        public void GainFood(float amount) {
             food += amount;
         }
     }
