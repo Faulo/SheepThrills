@@ -264,6 +264,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  spriteRenderer: {fileID: 3657257064816147171}
+  sprites:
+  - {fileID: 21300000, guid: cb5fec2d5c9322744bf242eda7915bd9, type: 3}
+  - {fileID: 21300000, guid: 6e45ae37bea8f5d408d92c42a3609c5a, type: 3}
+  - {fileID: 21300000, guid: 9349832d118ad5a428809912c6e1256c, type: 3}
+  - {fileID: 21300000, guid: 6e45ae37bea8f5d408d92c42a3609c5a, type: 3}
+  spriteDuration: 0.075
   torqueSmoothing: 0.25
   herdRotationWeight: 0.5
   inputRotationWeight: 0.5
