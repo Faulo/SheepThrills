@@ -34,6 +34,9 @@ namespace TheSheepGame.Player {
             if (move != Vector2.zero) {
                 herd.direction = move.normalized.SwizzleXZ();
             }
+            if (actionsInstance["Bite"].WasPressedThisFrame()) {
+                herd.Bite();
+            }
         }
         protected void OnDrawGizmos() {
             Gizmos.color = Color.green;
