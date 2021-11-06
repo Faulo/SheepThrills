@@ -181,7 +181,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0fdf64a15615b1f4db8809483f0a1362, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b650d9dcb53335445b5195cb4610d36c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -265,6 +265,10 @@ PrefabInstance:
     - target: {fileID: 8694672123793882075, guid: f6b578adf468c25499d18537aeb21b46, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
       value: 1.1944752
+      objectReference: {fileID: 0}
+    - target: {fileID: 8896757795583383262, guid: f6b578adf468c25499d18537aeb21b46, type: 3}
+      propertyPath: food
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6b578adf468c25499d18537aeb21b46, type: 3}
