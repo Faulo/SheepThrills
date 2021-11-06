@@ -174,7 +174,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _areaRadius
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _foodAmount
