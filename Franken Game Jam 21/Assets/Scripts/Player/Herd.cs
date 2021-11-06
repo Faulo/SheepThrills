@@ -16,6 +16,8 @@ namespace TheSheepGame.Player {
         public CinemachineVirtualCamera virtualCamera = default;
         [SerializeField, Expandable]
         public CinemachineTargetGroup cameraGroup = default;
+        [SerializeField, Expandable]
+        public Sheep sheepPrefab = default;
 
         [Header("Herd configuration")]
         [SerializeField]
@@ -35,7 +37,11 @@ namespace TheSheepGame.Player {
         [SerializeField]
         public float speed = 0;
         [SerializeField]
-        public Vector2 direction = Vector2.up;
+        public Vector3 sheepDirection = Vector2.up;
+        [SerializeField]
+        public Vector3 inputDirection = Vector3.up;
+        [SerializeField]
+        public Vector2 sheepCenter = Vector2.zero;
 
         public readonly List<Sheep> sheepList = new List<Sheep>();
         public int sheepCount => sheepList.Count;
@@ -54,15 +60,28 @@ namespace TheSheepGame.Player {
                     Multiply();
                 }
             }
+            sheepDirection = Vector3.zero;
+            sheepCenter = Vector2.zero;
+            for (int i = 0; i < sheepList.Count; i++) {
+                sheepDirection += sheepList[i].transform.forward;
+                sheepCenter += sheepList[i].position;
+            }
+            sheepDirection /= sheepCount;
+            sheepCenter /= sheepCount;
         }
 
         public void Multiply() {
             if (sheepList.Count >= maxSheepCount) {
                 return;
             }
-            var parent = sheepList.RandomElement();
-            var child = Instantiate(parent, parent.transform.position + UnityEngine.Random.insideUnitCircle.normalized.SwizzleXZ(), parent.transform.rotation, transform);
+            var child = Instantiate(sheepPrefab, (sheepCenter + randomOnUnitCircle).SwizzleXZ(), Quaternion.identity, transform);
             AddSheep(child);
+        }
+        Vector2 randomOnUnitCircle {
+            get {
+                int value = UnityEngine.Random.Range(0, 360);
+                return new Vector2(Mathf.Sin(value), Mathf.Cos(value));
+            }
         }
         void AddSheep(Sheep sheep) {
             sheep.herd = this;

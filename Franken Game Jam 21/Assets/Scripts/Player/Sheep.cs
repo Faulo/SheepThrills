@@ -6,8 +6,6 @@ namespace TheSheepGame.Player {
         [Header("MonoBehaviour configuration")]
         [SerializeField]
         public Herd herd = default;
-        [SerializeField]
-        public CharacterController character = default;
 
         [Header("Torque configuration")]
         [SerializeField, Range(0, 10)]
@@ -29,24 +27,15 @@ namespace TheSheepGame.Player {
 
         [Header("Debug fields")]
         [SerializeField]
-        Vector2 velocity = Vector3.zero;
+        public Vector2 position = Vector2.zero;
         [SerializeField]
-        Vector2 cohesion = Vector3.zero;
+        Vector2 velocity = Vector2.zero;
         [SerializeField]
-        Vector2 separation = Vector3.zero;
+        Vector2 separation = Vector2.zero;
+        [SerializeField]
+        Vector2 cohesion = Vector2.zero;
 
         float torque;
-
-        protected void Awake() {
-            OnValidate();
-        }
-        protected void OnValidate() {
-            if (!character) {
-                TryGetComponent(out character);
-            }
-        }
-        protected void Start() {
-        }
 
         protected void FixedUpdate() {
             float currentAngle = transform.rotation.eulerAngles.y;
@@ -56,31 +45,23 @@ namespace TheSheepGame.Player {
             transform.rotation = Quaternion.Euler(0, newAngle, 0);
 
             velocity = CalculateVelocity();
-            character.Move(velocity.SwizzleXZ() * Time.deltaTime);
+            transform.position += velocity.SwizzleXZ() * Time.deltaTime;
         }
         Vector3 CalculateDirection() {
-            var direction = Vector3.zero;
-            for (int i = 0; i < herd.sheepList.Count; i++) {
-                direction += herd.sheepList[i].transform.forward;
-            }
-            direction /= herd.sheepCount;
-            return (direction * herdRotationWeight)
-                 + (herd.direction.SwizzleXZ() * inputRotationWeight);
+            return (herd.sheepDirection * herdRotationWeight)
+                 + (herd.inputDirection * inputRotationWeight);
         }
         Vector2 CalculateVelocity() {
-            var myPosition = transform.position.SwizzleXZ();
-            cohesion = Vector2.zero;
+            position = transform.position.SwizzleXZ();
             separation = Vector2.zero;
             for (int i = 0; i < herd.sheepList.Count; i++) {
-                var theirPosition = herd.sheepList[i].transform.position.SwizzleXZ();
-                cohesion += theirPosition;
-                var delta = myPosition - theirPosition;
+                var theirPosition = herd.sheepList[i].position;
+                var delta = position - theirPosition;
                 if (delta != Vector2.zero) {
-                    separation += delta.normalized / delta.sqrMagnitude;
+                    separation += delta.normalized / Mathf.Max(0.01f, delta.sqrMagnitude);
                 }
             }
-            cohesion /= herd.sheepCount;
-            cohesion -= myPosition;
+            cohesion = herd.sheepCenter - position;
 
             return (herd.speed * herdVelocityWeight * transform.forward.SwizzleXZ())
                  + (cohesion * cohesionWeight)
