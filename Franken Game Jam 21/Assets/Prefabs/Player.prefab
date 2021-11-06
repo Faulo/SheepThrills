@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 8694672123793882075}
   cameraGroup: {fileID: 1431993567136659528}
+  sheepPrefab: {fileID: 1059528505097932594, guid: 74f75523bcb39e9468752ce71e36b7c8, type: 3}
   maxSpeed: 20
   speedOverCount:
     serializedVersion: 2
@@ -79,7 +80,9 @@ MonoBehaviour:
   maxSheepCount: 100
   multiplyOnBite: 1
   speed: 10
-  direction: {x: 0, y: 0, z: 1}
+  sheepDirection: {x: 0, y: 1, z: 0}
+  inputDirection: {x: 0, y: 1, z: 0}
+  sheepCenter: {x: 0, y: 0}
 --- !u!114 &6327340540315933156
 MonoBehaviour:
   m_ObjectHideFlags: 0
