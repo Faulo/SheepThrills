@@ -96,6 +96,9 @@ namespace TheSheepGame.Player {
 
             velocity = CalculateVelocity();
             character.Move(velocity.SwizzleXZ() * Time.deltaTime);
+            if (transform.position.y != 0) {
+                transform.position = transform.position.WithY(0);
+            }
         }
         Vector3 CalculateDirection() {
             return (herd.sheepDirection * herdRotationWeight)
