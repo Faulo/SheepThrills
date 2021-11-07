@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 
 namespace TheSheepGame.Player {
     public class HerdInput : MonoBehaviour {
-        [SerializeField] Herd herd = default;
-        [SerializeField] InputActionAsset actionsAsset = default;
+        [SerializeField]
+        Herd herd = default;
+        [SerializeField]
+        InputActionAsset actionsAsset = default;
 
         InputActionAsset actionsInstance;
 
@@ -21,29 +23,25 @@ namespace TheSheepGame.Player {
 
         protected void OnEnable() {
             actionsInstance = Instantiate(actionsAsset);
-            actionsAsset["Bite"].performed += OnBitePressed;
+            actionsInstance[nameof(Move)].performed += Move;
+            actionsInstance[nameof(Bite)].performed += Bite;
             actionsInstance.Enable();
         }
 
         protected void OnDisable() {
             if (actionsInstance) {
                 actionsInstance.Disable();
-                actionsAsset["Bite"].performed -= OnBitePressed;
+                actionsInstance[nameof(Move)].performed -= Move;
+                actionsInstance[nameof(Bite)].performed -= Bite;
                 Destroy(actionsInstance);
             }
         }
 
-        protected void Update() {
-            var move = actionsInstance["Move"].ReadValue<Vector2>();
-            if (move != Vector2.zero) {
-                herd.direction = move.normalized.SwizzleXZ();
-            }
+        void Move(InputAction.CallbackContext context) {
+            herd.inputDirection = context.ReadValue<Vector2>().SwizzleXZ();
         }
 
-        private void OnBitePressed(InputAction.CallbackContext context) {
-            if (!context.performed) {
-                return;
-            }
+        void Bite(InputAction.CallbackContext context) {
             herd.Bite();
         }
 
