@@ -173,6 +173,10 @@ PrefabInstance:
       propertyPath: _visualEffects.Array.data[0]
       value: 
       objectReference: {fileID: 1090691622764144244}
+    - target: {fileID: 7393969883024826005, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b7b4083c71e3146498c586500b956b20, type: 3}
     - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
@@ -242,8 +246,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884180523454, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969884180523454, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969884180523454, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884180523454, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_AnchoredPosition.x
