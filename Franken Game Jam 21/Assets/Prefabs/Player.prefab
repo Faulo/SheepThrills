@@ -458,10 +458,10 @@ MonoBehaviour:
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
-    ModeOverride: 0
+    ModeOverride: 1
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.8096385, y: 1}
+    m_SensorSize: {x: 1.7783133, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_MaximumDistance: 5000
   m_MinimumFOV: 30
   m_MaximumFOV: 120
-  m_MinimumOrthoSize: 1
+  m_MinimumOrthoSize: 10
   m_MaximumOrthoSize: 5000
 --- !u!114 &579865719827002760
 MonoBehaviour:
