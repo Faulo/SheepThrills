@@ -11,6 +11,8 @@ namespace TheSheepGame.Player {
         public static event Action onBite;
         public static event Action<Sheep> onSpawnSheep;
         public static event Action<Sheep> onDestroySheep;
+        public static event Action<float> onGainFood;
+        public static event Action onLose;
 
         [Header("MonoBehaviour configuration")]
         [SerializeField, Expandable]
@@ -32,9 +34,15 @@ namespace TheSheepGame.Player {
         [SerializeField]
         float foodPerSheep = 10;
         [SerializeField]
+        float hungerPerSecond = 1;
+        [SerializeField]
         public int maxSheepCount = 100;
         [SerializeField]
+        float grassInvincibilityDuration = 1;
+        [SerializeField]
         bool multiplyOnBite = false;
+        [SerializeField]
+        bool autoBite = false;
         [SerializeField]
         AnimationCurve repelCurveX = AnimationCurve.Constant(-10, 10, 0);
         [SerializeField]
@@ -53,6 +61,8 @@ namespace TheSheepGame.Player {
         public Vector2 sheepCenter = Vector2.zero;
         [SerializeField]
         float sheepRadius = 0;
+        [SerializeField]
+        float grassTimer = 0;
 
         public readonly List<Sheep> sheepList = new List<Sheep>();
         public int sheepCount => sheepList.Count;
@@ -78,9 +88,23 @@ namespace TheSheepGame.Player {
             herdLight.pointLightOuterRadius = sheepRadius;
             herdLight.transform.position = sheepCenter.SwizzleXZ();
 
-            if (food > foodPerSheep) {
-                food -= foodPerSheep;
+            if (grassTimer > 0) {
+                grassTimer -= Time.deltaTime;
+            } else {
+                food -= sheepCount * hungerPerSecond * Time.deltaTime;
+            }
+
+            if (autoBite) {
+                Bite();
+            }
+
+            if (food > foodPerSheep * sheepCount) {
+                food -= foodPerSheep * sheepCount;
                 Multiply();
+            }
+            if (food < -foodPerSheep) {
+                food += foodPerSheep;
+                Decimate();
             }
         }
 
@@ -108,11 +132,28 @@ namespace TheSheepGame.Player {
             sheep.herd = this;
             sheepList.Add(sheep);
             cameraGroup.AddMember(sheep.transform, 1, 1);
-            speed = maxSpeed * speedOverCount.Evaluate((float)sheepList.Count / maxSheepCount);
+            UpdateSpeed();
             onSpawnSheep?.Invoke(sheep);
         }
+        public void Decimate() {
+            if (sheepList.Count == 0) {
+                return;
+            }
+            RemoveSheep(sheepList.RandomElement());
+        }
         void RemoveSheep(Sheep sheep) {
+            sheepList.Remove(sheep);
+            cameraGroup.RemoveMember(sheep.transform);
+            UpdateSpeed();
             onDestroySheep?.Invoke(sheep);
+            Destroy(sheep.gameObject);
+
+            if (sheepList.Count == 0) {
+                Lose();
+            }
+        }
+        void UpdateSpeed() {
+            speed = maxSpeed * speedOverCount.Evaluate((float)sheepList.Count / maxSheepCount);
         }
         public void Bite() {
             if (multiplyOnBite) {
@@ -120,9 +161,17 @@ namespace TheSheepGame.Player {
             }
             onBite?.Invoke();
         }
+        void Lose() {
+            Destroy(gameObject);
 
-        public void GainFood(int amount) {
+            onLose?.Invoke();
+        }
+        public void GainFood(float amount) {
             food += amount;
+            onGainFood?.Invoke(amount);
+        }
+        public void EatGrass() {
+            grassTimer = grassInvincibilityDuration;
         }
     }
 }

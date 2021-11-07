@@ -7,7 +7,7 @@ namespace TheSheepGame.WorldObjects
     public class FoodDestructibleDisable : MonoBehaviour {
         [SerializeField] private FoodDestructible _destructible;
         [SerializeField] private List<SpriteRenderer> _renderers = new List<SpriteRenderer>();
-        [SerializeField] private BoxCollider _ownCollider;
+        [SerializeField] private Collider _ownCollider;
 
         private void OnEnable() {
             _destructible.onObjectDestroyed += HandleDestruction;
@@ -21,7 +21,9 @@ namespace TheSheepGame.WorldObjects
             foreach (var renderer in _renderers) {
                 renderer.enabled = false;
             }
-            _ownCollider.enabled = false;
+            if (_ownCollider) {
+                _ownCollider.enabled = false;
+            }
         }
     }
 }

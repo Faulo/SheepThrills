@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using Slothsoft.UnityExtensions;
 using UnityEngine;
 
@@ -6,6 +8,23 @@ namespace TheSheepGame.Player {
         [Header("MonoBehaviour configuration")]
         [SerializeField]
         public Herd herd = default;
+        [SerializeField]
+        public CharacterController character = default;
+
+        [Header("Spawn configuration")]
+        [SerializeField, Range(0, 10)]
+        float spawnDuration = 1;
+        [SerializeField]
+        AnimationCurve spawnScaling = AnimationCurve.Linear(0, 0, 1, 1);
+
+        [Header("Sprite configuration")]
+        [SerializeField]
+        SpriteRenderer spriteRenderer = default;
+        [SerializeField]
+        Sprite[] sprites = Array.Empty<Sprite>();
+        [SerializeField, Range(0, 10)]
+        float spriteDuration = 1;
+        int spriteIndex;
 
         [Header("Torque configuration")]
         [SerializeField, Range(0, 10)]
@@ -41,6 +60,33 @@ namespace TheSheepGame.Player {
 
         float torque;
 
+        protected void Awake() {
+            OnValidate();
+        }
+        protected void OnValidate() {
+            if (!character) {
+                TryGetComponent(out character);
+            }
+        }
+
+        float size {
+            set {
+                transform.localScale = new Vector3(value, 1, value);
+            }
+        }
+        protected IEnumerator Start() {
+            for (float timer = 0; timer < spawnDuration; timer += Time.deltaTime) {
+                size = spawnScaling.Evaluate(timer / spawnDuration);
+                yield return null;
+            }
+            size = spawnScaling.Evaluate(1);
+            while (true) {
+                spriteIndex = (spriteIndex + 1) % sprites.Length;
+                spriteRenderer.sprite = sprites[spriteIndex];
+                yield return Wait.forSeconds[spriteDuration];
+            }
+        }
+
         protected void FixedUpdate() {
             float currentAngle = transform.rotation.eulerAngles.y;
             float targetAngle = Quaternion.LookRotation(CalculateDirection(), Vector3.up).eulerAngles.y;
@@ -49,7 +95,7 @@ namespace TheSheepGame.Player {
             transform.rotation = Quaternion.Euler(0, newAngle, 0);
 
             velocity = CalculateVelocity();
-            transform.position += velocity.SwizzleXZ() * Time.deltaTime;
+            character.Move(velocity.SwizzleXZ() * Time.deltaTime);
         }
         Vector3 CalculateDirection() {
             return (herd.sheepDirection * herdRotationWeight)
@@ -75,7 +121,7 @@ namespace TheSheepGame.Player {
                  + (cohesion * cohesionWeight)
                  + (separation * separationWeight)
                  + (repel * repelWeight)
-                 + (Random.insideUnitCircle * randomDirectionWeight);
+                 + (UnityEngine.Random.insideUnitCircle * randomDirectionWeight);
         }
     }
 }

@@ -20,6 +20,12 @@ namespace TheSheepGame.WorldObjects {
         [SerializeField] LayerMask sheepLayer = default;
         static Collider[] colliders;
 
+        public int foodAmount {
+            get {
+                return _foodAmount;
+            }
+        }
+        
         private void OnEnable() {
             Herd.onBite += OnBiteInput;
         }
@@ -60,7 +66,7 @@ namespace TheSheepGame.WorldObjects {
             yield return null;
         }
 
-        private void OnDrawGizmosSelected() {
+        private void OnDrawGizmos() {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(transform.position, _areaRadius);
         }

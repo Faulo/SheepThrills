@@ -12,11 +12,11 @@ namespace TheSheepGame.Player {
         protected void OnDisable() {
             Herd.onSpawnSheep -= HandleSpawnSheep;
         }
-        void HandleSpawnSheep(Sheep obj) {
+        void HandleSpawnSheep(Sheep sheep) {
             if (asChild) {
-                Instantiate(prefab, obj.transform);
+                Instantiate(prefab, sheep.transform);
             } else {
-                Instantiate(prefab, obj.transform.position, obj.transform.rotation);
+                Instantiate(prefab, sheep.transform.position, sheep.transform.rotation);
             }
         }
     }
