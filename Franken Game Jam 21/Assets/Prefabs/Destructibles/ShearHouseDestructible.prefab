@@ -1,34 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!65 &1250677531198151152
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314945514140616046}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 10, y: 1, z: 8}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-4465820499003958627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 314945514140616046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c24896fd82449a449d7cd12c971d1d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _destructible: {fileID: 314945514140616047}
-  _renderers:
-  - {fileID: 4545069006238683530}
-  _ownCollider: {fileID: 1250677531198151152}
 --- !u!212 &4545069006238683530
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -81,6 +52,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!65 &1250677531198151152
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314945514140616046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 8}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4465820499003958627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314945514140616046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c24896fd82449a449d7cd12c971d1d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _destructible: {fileID: 314945514140616047}
+  _renderers:
+  - {fileID: 4545069006238683530}
+  _ownCollider: {fileID: 1250677531198151152}
 --- !u!73398921 &5551521030808891685
 VFXRenderer:
   serializedVersion: 1
@@ -187,7 +187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _areaRadius
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _foodAmount
