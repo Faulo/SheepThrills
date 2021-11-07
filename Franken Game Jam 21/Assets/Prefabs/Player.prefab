@@ -320,8 +320,9 @@ MonoBehaviour:
   foodPerSheep: 2
   hungerPerSecond: 0.5
   maxSheepCount: 100
+  grassInvincibilityDuration: 1
   multiplyOnBite: 0
-  autoBite: 1
+  autoBite: 0
   repelCurveX:
     serializedVersion: 2
     m_Curve:
@@ -385,6 +386,7 @@ MonoBehaviour:
   sheepRotation: {x: 0, y: 0, z: 0, w: 1}
   sheepCenter: {x: 0, y: 0}
   sheepRadius: 0
+  grassTimer: 0
 --- !u!114 &6327340540315933156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,6 +611,65 @@ Transform:
   m_Father: {fileID: 1077971391081362590}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4149376254332837313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121503536493897765}
+  - component: {fileID: 1040815999537553849}
+  m_Layer: 0
+  m_Name: Bite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &121503536493897765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149376254332837313}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4483090238233862887}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1040815999537553849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149376254332837313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49053161422cfd43962dd84269f2ba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onBite:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6207373038166035395, guid: 67bc3ce72e1cebd4d86adaecdffc31d0, type: 3}
+        m_TargetAssemblyTypeName: TheSheepGame.OneShotAudio, TheSheepGame
+        m_MethodName: InstantiatePrefab
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5259390889649656350
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +876,7 @@ Transform:
   m_Children:
   - {fileID: 2207046089381258120}
   - {fileID: 7158404769071327501}
+  - {fileID: 121503536493897765}
   m_Father: {fileID: 1077971391081362590}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
