@@ -29,5 +29,8 @@ namespace TheSheepGame {
                 Destroy(gameObject);
             }
         }
+        public void InstantiatePrefab() {
+            Instantiate(this);
+        }
     }
 }

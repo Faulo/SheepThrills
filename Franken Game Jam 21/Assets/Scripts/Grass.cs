@@ -17,15 +17,7 @@ namespace TheSheepGame {
                 TryGetComponent(out tilemap);
             }
         }
-
-        protected void OnEnable() {
-            Herd.onBite += OnHandleBite;
-        }
-        protected void OnDisable() {
-            Herd.onBite -= OnHandleBite;
-        }
-
-        void OnHandleBite() {
+        protected void FixedUpdate() {
             for (int i = 0; i < Herd.Instance.sheepCount; i++) {
                 var position = tilemap.WorldToCell(Herd.Instance.sheepList[i].transform.position);
                 if (tilemap.HasTile(position)) {
