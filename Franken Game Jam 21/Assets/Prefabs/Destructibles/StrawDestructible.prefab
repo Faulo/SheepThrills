@@ -11,7 +11,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.24, y: 1, z: 2.51}
+  m_Size: {x: 1.5, y: 1, z: 3.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4760777738853309733
 MonoBehaviour:
@@ -174,8 +174,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5005704462357411308}
     - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6830127
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.6830127
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.18301266
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.18301266
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969883537453100, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 7393969883537453107, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_Name
@@ -186,12 +206,16 @@ PrefabInstance:
       value: StrawDestructible
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
+      propertyPath: _areaRadius
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _foodAmount
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _neededSheepCount
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267378, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: m_RootOrder
