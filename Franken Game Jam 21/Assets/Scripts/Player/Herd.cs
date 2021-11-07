@@ -161,7 +161,7 @@ namespace TheSheepGame.Player {
             }
             onBite?.Invoke();
         }
-        void Lose() {
+        public void Lose() {
             Destroy(gameObject);
 
             onLose?.Invoke();
