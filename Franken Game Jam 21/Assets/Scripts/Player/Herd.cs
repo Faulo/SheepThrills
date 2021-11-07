@@ -98,8 +98,8 @@ namespace TheSheepGame.Player {
                 Bite();
             }
 
-            if (food > foodPerSheep * sheepCount) {
-                food -= foodPerSheep * sheepCount;
+            if (food > foodPerSheep) {
+                food -= foodPerSheep;
                 Multiply();
             }
             if (food < -foodPerSheep) {
