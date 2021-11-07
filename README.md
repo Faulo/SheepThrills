@@ -16,7 +16,7 @@ Franken Game Jam 2021:
 - Nicolas Teichtweier (programming)
 - Laura Wünsch (art)
 
-### Third Party Credits
+## Third Party Credits
 - Art Texture: [orchidart](https://www.freepik.com/free-vector/green-alcohol-ink-background_12740257.htm)
 - Ground:  [brgfx](https://www.freepik.com/free-vector/brown-soil-texture-background_3478044.htm)
 - Forest: [denamorado](https://www.freepik.com/free-photo/abstract-green-grunge-background_4037904.htm)
