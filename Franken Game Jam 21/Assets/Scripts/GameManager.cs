@@ -1,27 +1,20 @@
-using System.Collections;
 using MyBox;
-using Slothsoft.UnityExtensions;
-using TheSheepGame.Player;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace TheSheepGame {
     public class GameManager : Singleton<GameManager> {
-        [SerializeField, Range(0, 10)]
-        float restartTimeout = 1;
-
-        protected void OnEnable() {
-            Herd.onLose += HandleLose;
+        public void LoadScene(string name) {
+            SceneManager.LoadScene(name);
         }
-        protected void OnDisable() {
-            Herd.onLose -= HandleLose;
-        }
-        void HandleLose() {
-            StartCoroutine(RestartRoutine());
-        }
-        IEnumerator RestartRoutine() {
-            yield return Wait.forSeconds[restartTimeout];
+        public void Restart() {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        public void Quit() {
+            Application.Quit();
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#endif
         }
     }
 }
