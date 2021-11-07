@@ -25,6 +25,7 @@ namespace TheSheepGame.Player {
             actionsInstance = Instantiate(actionsAsset);
             actionsInstance[nameof(Move)].performed += Move;
             actionsInstance[nameof(Bite)].performed += Bite;
+            actionsInstance[nameof(Menu)].performed += Menu;
             actionsInstance.Enable();
         }
 
@@ -33,6 +34,7 @@ namespace TheSheepGame.Player {
                 actionsInstance.Disable();
                 actionsInstance[nameof(Move)].performed -= Move;
                 actionsInstance[nameof(Bite)].performed -= Bite;
+                actionsInstance[nameof(Menu)].performed -= Menu;
                 Destroy(actionsInstance);
             }
         }
@@ -43,6 +45,10 @@ namespace TheSheepGame.Player {
 
         void Bite(InputAction.CallbackContext context) {
             herd.Bite();
+        }
+
+        void Menu(InputAction.CallbackContext context) {
+            herd.Lose();
         }
 
         protected void OnDrawGizmos() {
