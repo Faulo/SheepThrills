@@ -6,8 +6,6 @@ namespace TheSheepGame {
     public class Grass : MonoBehaviour {
         [SerializeField]
         Tilemap tilemap = default;
-        [SerializeField, Range(0, 10)]
-        float foodPerGrassTile = 1;
 
         protected void Awake() {
             OnValidate();
@@ -32,7 +30,7 @@ namespace TheSheepGame {
                 var position = tilemap.WorldToCell(Herd.Instance.sheepList[i].transform.position);
                 if (tilemap.HasTile(position)) {
                     tilemap.SetTile(position, default);
-                    Herd.Instance.GainFood(foodPerGrassTile);
+                    Herd.Instance.EatGrass();
                 }
             }
         }

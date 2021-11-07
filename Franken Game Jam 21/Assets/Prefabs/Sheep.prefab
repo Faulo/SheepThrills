@@ -29,6 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 537757960822626298}
+  - {fileID: 8619859126687652718}
   m_Father: {fileID: 4537177207041585907}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -264,6 +265,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  spriteRenderer: {fileID: 3657257064816147171}
+  sprites:
+  - {fileID: 21300000, guid: cb5fec2d5c9322744bf242eda7915bd9, type: 3}
+  - {fileID: 21300000, guid: 6e45ae37bea8f5d408d92c42a3609c5a, type: 3}
+  - {fileID: 21300000, guid: 9349832d118ad5a428809912c6e1256c, type: 3}
+  - {fileID: 21300000, guid: 6e45ae37bea8f5d408d92c42a3609c5a, type: 3}
+  spriteDuration: 0.075
   torqueSmoothing: 0.25
   herdRotationWeight: 0.5
   inputRotationWeight: 0.5
@@ -361,3 +369,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &2867487946871279083
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 128505682955183962}
+    m_Modifications:
+    - target: {fileID: 5788455023916242560, guid: 3db7d8a0df121754d8e098bff565c908, type: 3}
+      propertyPath: m_Name
+      value: DustVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788455023916242565, guid: 3db7d8a0df121754d8e098bff565c908, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788455023916242565, guid: 3db7d8a0df121754d8e098bff565c908, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788455023916242565, guid: 3db7d8a0df121754d8e098bff565c908, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788455023916242565, guid: 3db7d8a0df121754d8e098bff565c908, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3db7d8a0df121754d8e098bff565c908, type: 3}
+--- !u!4 &8619859126687652718 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5788455023916242565, guid: 3db7d8a0df121754d8e098bff565c908, type: 3}
+  m_PrefabInstance: {fileID: 2867487946871279083}
+  m_PrefabAsset: {fileID: 0}
