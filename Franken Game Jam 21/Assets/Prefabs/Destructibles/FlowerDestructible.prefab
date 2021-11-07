@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!135 &2419007753906030630
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6113134699367230649}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6788161861324033345
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,7 +28,7 @@ MonoBehaviour:
   _destructible: {fileID: 6113134699367230648}
   _renderers:
   - {fileID: 218798555458340767}
-  _ownCollider: {fileID: 0}
+  _ownCollider: {fileID: 2419007753906030630}
 --- !u!212 &218798555458340767
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -178,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _areaRadius
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7393969884020267377, guid: 0428857c5d4cac644aac64688b6aabd0, type: 3}
       propertyPath: _foodAmount

@@ -317,7 +317,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   food: 0
-  foodPerSheep: 1
+  foodPerSheep: 2
   hungerPerSecond: 0.5
   maxSheepCount: 100
   multiplyOnBite: 0
