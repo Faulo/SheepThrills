@@ -37,6 +37,8 @@ namespace TheSheepGame.Player {
         [SerializeField]
         public int maxSheepCount = 100;
         [SerializeField]
+        float grassInvincibilityDuration = 1;
+        [SerializeField]
         bool multiplyOnBite = false;
         [SerializeField]
         bool autoBite = false;
@@ -58,6 +60,8 @@ namespace TheSheepGame.Player {
         public Vector2 sheepCenter = Vector2.zero;
         [SerializeField]
         float sheepRadius = 0;
+        [SerializeField]
+        float grassTimer = 0;
 
         public readonly List<Sheep> sheepList = new List<Sheep>();
         public int sheepCount => sheepList.Count;
@@ -83,7 +87,11 @@ namespace TheSheepGame.Player {
             herdLight.pointLightOuterRadius = sheepRadius;
             herdLight.transform.position = sheepCenter.SwizzleXZ();
 
-            food -= sheepCount * hungerPerSecond * Time.deltaTime;
+            if (grassTimer > 0) {
+                grassTimer -= Time.deltaTime;
+            } else {
+                food -= sheepCount * hungerPerSecond * Time.deltaTime;
+            }
 
             if (autoBite) {
                 Bite();
@@ -159,6 +167,9 @@ namespace TheSheepGame.Player {
         }
         public void GainFood(float amount) {
             food += amount;
+        }
+        public void EatGrass() {
+            grassTimer = grassInvincibilityDuration;
         }
     }
 }
