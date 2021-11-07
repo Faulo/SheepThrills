@@ -15,6 +15,7 @@ Franken Game Jam 2021:
 - Gregor Sönnichsen (sound design, art)
 - Nicolas Teichtweier (programming)
 - Laura Wünsch (art)
+- All (voice acting, project planning)
 
 ## Third Party Credits
 - Art Texture: [orchidart](https://www.freepik.com/free-vector/green-alcohol-ink-background_12740257.htm)
