@@ -28,9 +28,15 @@ namespace TheSheepGame {
             if (!tilemap) {
                 TryGetComponent(out tilemap);
             }
-            grid.cellSize = cellSize;
-            grid.cellGap = cellGap;
-            grid.transform.localPosition = cellOffset;
+            if (grid.cellSize != cellSize) {
+                grid.cellSize = cellSize;
+            }
+            if (grid.cellGap != cellGap) {
+                grid.cellGap = cellGap;
+            }
+            if (grid.transform.localPosition != cellOffset) {
+                grid.transform.localPosition = cellOffset;
+            }
         }
         protected void Start() {
             foreach (var position in tilemap.cellBounds.allPositionsWithin) {
